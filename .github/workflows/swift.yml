@@ -16,7 +16,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Build
+
+    - name: Build HamsteriOS
       run: swift build -v
-    - name: Run tests
+      working-directory: Packages/HamsteriOS
+
+    - name: Run HamsteriOS tests
       run: swift test -v
+      working-directory: Packages/HamsteriOS
+
+
