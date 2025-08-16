@@ -17,6 +17,19 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    
+    - name: Cache Swift Packages
+      id: cache-swiftpm
+      uses: actions/cache@v4
+      with:
+        path: |
+          .build
+          ~/Library/Developer/Xcode/DerivedData
+          ~/Library/Caches/org.swift.swiftpm
+        key: ${{ runner.os }}-swiftpm-${{ hashFiles('Package.resolved') }}
+        restore-keys: |
+          ${{ runner.os }}-swiftpm-
+
     - name: Build HamsteriOS
       run: swift build -v
       working-directory: Packages/HamsteriOS
