@@ -26,9 +26,13 @@ jobs:
           .build
           ~/Library/Developer/Xcode/DerivedData
           ~/Library/Caches/org.swift.swiftpm
-        key: ${{ runner.os }}-swiftpm-${{ hashFiles('Package.resolved') }}
+        key: macos-swiftpm-${{ runner.os }}-${{ hashFiles('**/Package.resolved') }}
         restore-keys: |
-          ${{ runner.os }}-swiftpm-
+          macos-swiftpm-${{ runner.os }}-
+        enableCrossOsArchive: false
+        fail-on-cache-miss: false
+        lookup-only: false
+        save-always: true
 
     - name: Build HamsteriOS
       run: swift build -v
